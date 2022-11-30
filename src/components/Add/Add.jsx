@@ -4,7 +4,18 @@ import Nav from '../Nav/Nav'
 import { useState, useEffect } from 'react'
 import { useFormik } from 'formik'
 import addFormSchema from '../../formSchema/data'
+import Axios from 'axios'
 
+const addData = async(data) => {
+    console.log("Add data called")
+    try{
+        const res = await Axios.post("https://admin-panel-backend-production.up.railway.app/api/jobs", 
+      data)
+        console.log("Successfully added data",res)
+    }catch(error){
+        console.log("Some error occurred in adding data",error)
+    }
+}
 
 const Add = () => {
 
@@ -41,7 +52,7 @@ const Add = () => {
         enableReinitialize: true,
         validationSchema: addFormSchema,
         onSubmit: () => {
-            let finalData = [{ ...values, ...imgLogo, ...{ tags } }]
+            let finalData = { ...values, ...imgLogo, ...{ tags } }
             sendData(finalData);
         }
     })
@@ -70,7 +81,8 @@ const Add = () => {
 
 
     const sendData = (finalValues) => {
-        console.log(finalValues)
+        console.log("Final Values ",finalValues)
+        addData(finalValues)
     }
 
 
