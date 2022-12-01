@@ -40,6 +40,7 @@ const Add = () => {
     expectedSalary: "",
     portalLink: "",
     jobDescription: "",
+    experience: ""
   });
 
   // Formik
@@ -127,6 +128,12 @@ const Add = () => {
       Error: "Error",
       name: "portalLink",
     },
+    {
+      key: 8,
+      label: "Experience",
+      Error: "Error",
+      name: "experience",
+    },
   ];
 
   return (
@@ -203,18 +210,18 @@ const Add = () => {
                   {name === "companyName" && touched.companyName
                     ? errors.companyName
                     : name === "jobTitle" && touched.jobTitle
-                    ? errors.jobTitle
-                    : name === "location" && touched.location
-                    ? errors.location
-                    : name === "duration" && touched.duration
-                    ? errors.duration
-                    : name === "startDate" && touched.startDate
-                    ? errors.startDate
-                    : name === "expectedSalary" && touched.expectedSalary
-                    ? errors.expectedSalary
-                    : name === "portalLink" && touched.portalLink
-                    ? errors.portalLink
-                    : null}
+                      ? errors.jobTitle
+                      : name === "location" && touched.location
+                        ? errors.location
+                        : name === "duration" && touched.duration
+                          ? errors.duration
+                          : name === "startDate" && touched.startDate
+                            ? errors.startDate
+                            : name === "expectedSalary" && touched.expectedSalary
+                              ? errors.expectedSalary
+                              : name === "portalLink" && touched.portalLink
+                                ? errors.portalLink
+                                : null}
                 </span>
               </div>
             );
