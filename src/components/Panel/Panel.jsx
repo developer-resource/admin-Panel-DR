@@ -31,7 +31,7 @@ const Panel = () => {
         <div className="panel-tool row">
           <div className="row panel-icon text-center">
             <div className="col-md-12  col-lg-4 col-12 mb-5 mb-lg-0 tools">
-              <img src={dbImg} className='img-fluid' alt="view-data" />
+              <img src={dbImg} onClick={()=> navigate('/data')} className='img-fluid' alt="view-data" />
               <div className="h5 tool-label mt-3">Database</div>
             </div>
             <div className="col-md-12 col-lg-4 col-12 mb-5 mt-5 mt-lg-0 mb-lg-0 tools">

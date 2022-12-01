@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import addFormSchema from "../../formSchema/data";
 import Axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const addData = async (data) => {
   console.log("Add data called");
@@ -14,8 +16,30 @@ const addData = async (data) => {
       data
     );
     console.log("Successfully added data", res);
+
+    toast.success('Data Submitted successfully !', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      
   } catch (error) {
     console.log("Some error occurred in adding data", error);
+    toast.error('Something went wrong :( ', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
 };
 
@@ -29,8 +53,7 @@ const Add = () => {
   const [imgLogo, setImgLogo] = useState(null);
 
   // Formik
-  const [initialValues, setInitialValues] = useState({
-    //eslint-disable-line
+  const [initialValues, setInitialValues] = useState({   //eslint-disable-line
     companyName: "",
     jobTitle: "",
     type: "Full Time",
@@ -137,118 +160,132 @@ const Add = () => {
   ];
 
   return (
-    <div className="add-container p-2 container-fluid">
-      <div className="container">
-        {/* Header */}
-        <Nav position="Home" />
+    <>
+      <div className="add-container p-2 container-fluid">
+        <div className="container">
+          {/* Header */}
+          <Nav position="Home" />
 
-        {/* Form */}
-        <div className="row mt-5">
-          <div className="col-12 companyLogo text-center w-100 mb-5 d-flex flex-column col-md-4">
-            <label
-              htmlFor="companyLogo"
-              className="d-flex justify-content-center align-item-center"
-            >
-              <i className="mt-1 me-1 fa-solid fa-link"></i>Choose Company Logo
-            </label>
-            <input
-              type="file"
-              onChange={logoHandler}
-              id="companyLogo"
-              hidden
-              accept="image/*"
-            />
-            {imgLogo ? (
-              <img className="logo mt-3" src={imgLogo.profileImg} alt="Logo" />
-            ) : null}
-          </div>
+          {/* Form */}
+          <div className="row mt-5">
+            <div className="col-12 companyLogo text-center w-100 mb-5 d-flex flex-column col-md-4">
+              <label
+                htmlFor="companyLogo"
+                className="d-flex justify-content-center align-item-center"
+              >
+                <i className="mt-1 me-1 fa-solid fa-link"></i>Choose Company Logo
+              </label>
+              <input
+                type="file"
+                onChange={logoHandler}
+                id="companyLogo"
+                hidden
+                accept="image/*"
+              />
+              {imgLogo ? (
+                <img className="logo mt-3" src={imgLogo.profileImg} alt="Logo" />
+              ) : null}
+            </div>
 
-          <div className="col-12  mb-5 d-flex flex-column col-md-4">
-            <label htmlFor="jobType">Type</label>
-            <select
-              id="jobType"
-              name="type"
-              onChange={handleChange}
-              className="mt-1 jobType"
-            >
-              <option value="Full Time">Full Time</option>
-              <option value="Internship">Internship</option>
-            </select>
-            {errors.type && touched.type ? (
-              <span className="error mt-1">{errors.type}</span>
-            ) : null}
-          </div>
+            <div className="col-12  mb-5 d-flex flex-column col-md-4">
+              <label htmlFor="jobType">Type</label>
+              <select
+                id="jobType"
+                name="type"
+                onChange={handleChange}
+                className="mt-1 jobType"
+              >
+                <option value="Full Time">Full Time</option>
+                <option value="Internship">Internship</option>
+              </select>
+              {errors.type && touched.type ? (
+                <span className="error mt-1">{errors.type}</span>
+              ) : null}
+            </div>
 
-          <div className="col-12  mb-5 d-flex flex-column col-md-4">
-            <label htmlFor="techTags">Tech Tags</label>
-            <input type="text" onKeyUp={handleTags} className="input-field" />
-            <div className="row">
-              <div className="col-12">
-                {tags ? (
-                  <small style={{ textTransform: "uppercase" }}>
-                    {tags + " "}
-                  </small>
-                ) : null}
+            <div className="col-12  mb-5 d-flex flex-column col-md-4">
+              <label htmlFor="techTags">Tech Tags</label>
+              <input type="text" onKeyUp={handleTags} className="input-field" />
+              <div className="row">
+                <div className="col-12">
+                  {tags ? (
+                    <small style={{ textTransform: "uppercase" }}>
+                      {tags + " "}
+                    </small>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
 
-          {formList.map(({ key, name, label }) => {
-            return (
-              <div
-                key={key}
-                className="col-12 mb-5 d-flex flex-column col-md-4"
+            {formList.map(({ key, name, label }) => {
+              return (
+                <div
+                  key={key}
+                  className="col-12 mb-5 d-flex flex-column col-md-4"
+                >
+                  <small className="companyLabel">{label}</small>
+                  <input
+                    name={name}
+                    onChange={handleChange}
+                    className="input-field"
+                    type="text"
+                  />
+                  <span className="error mt-1">
+                    {name === "companyName" && touched.companyName
+                      ? errors.companyName
+                      : name === "jobTitle" && touched.jobTitle
+                        ? errors.jobTitle
+                        : name === "location" && touched.location
+                          ? errors.location
+                          : name === "duration" && touched.duration
+                            ? errors.duration
+                            : name === "startDate" && touched.startDate
+                              ? errors.startDate
+                              : name === "expectedSalary" && touched.expectedSalary
+                                ? errors.expectedSalary
+                                : name === "portalLink" && touched.portalLink
+                                  ? errors.portalLink
+                                  : null}
+                  </span>
+                </div>
+              );
+            })}
+
+            <div className="col-12  text-center">
+              <textarea
+                cols="30"
+                name="jobDescription"
+                onChange={handleChange}
+                placeholder="Job Description"
+                className="w-50 mb-3 jobDescription"
+                rows="10"
+              ></textarea>
+            </div>
+            <div className="col-12 text-center">
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="w-25 submit-btn mx-auto"
               >
-                <small className="companyLabel">{label}</small>
-                <input
-                  name={name}
-                  onChange={handleChange}
-                  className="input-field"
-                  type="text"
-                />
-                <span className="error mt-1">
-                  {name === "companyName" && touched.companyName
-                    ? errors.companyName
-                    : name === "jobTitle" && touched.jobTitle
-                      ? errors.jobTitle
-                      : name === "location" && touched.location
-                        ? errors.location
-                        : name === "duration" && touched.duration
-                          ? errors.duration
-                          : name === "startDate" && touched.startDate
-                            ? errors.startDate
-                            : name === "expectedSalary" && touched.expectedSalary
-                              ? errors.expectedSalary
-                              : name === "portalLink" && touched.portalLink
-                                ? errors.portalLink
-                                : null}
-                </span>
-              </div>
-            );
-          })}
-
-          <div className="col-12  text-center">
-            <textarea
-              cols="30"
-              name="jobDescription"
-              onChange={handleChange}
-              placeholder="Job Description"
-              className="w-50 mb-3 jobDescription"
-              rows="10"
-            ></textarea>
-          </div>
-          <div className="col-12 text-center">
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="w-25 submit-btn mx-auto"
-            >
-              Submit
-            </button>
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
   );
 };
 
