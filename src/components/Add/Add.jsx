@@ -26,8 +26,8 @@ const addData = async (data) => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-      
+    });
+
   } catch (error) {
     console.log("Some error occurred in adding data", error);
     toast.error('Something went wrong :( ', {
@@ -39,7 +39,7 @@ const addData = async (data) => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
+    });
   }
 };
 
@@ -63,7 +63,8 @@ const Add = () => {
     expectedSalary: "",
     portalLink: "",
     jobDescription: "",
-    experience: ""
+    experience: "",
+    batch: ''
   });
 
   // Formik
@@ -157,7 +158,15 @@ const Add = () => {
       Error: "Error",
       name: "experience",
     },
+    {
+      key: 9,
+      label: "Batch",
+      Error: "Error",
+      name: "batch",
+    },
   ];
+
+  // experience, batch eligible, show more, delete btn
 
   return (
     <>
