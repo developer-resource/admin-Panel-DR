@@ -10,7 +10,8 @@ const addFormSchema = yup.object({
   expectedSalary: yup.string().required("*Expected Salary required."),
   portalLink: yup.string().required("*Portal Link required."),
   jobDescription: yup.string(),
-  experience: yup.string()
+  experience: yup.string(),
+  batch : yup.string()
 });
 
 export default addFormSchema;
