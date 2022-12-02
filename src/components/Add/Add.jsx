@@ -69,13 +69,19 @@ const Add = () => {
 
   // Formik
 
-  const { values, handleSubmit, handleChange, errors, touched } = useFormik({
+  const { values, handleSubmit, handleChange, errors, touched, resetForm } = useFormik({
     initialValues,
     enableReinitialize: true,
     validationSchema: addFormSchema,
     onSubmit: () => {
       let finalData = { ...values, ...imgLogo, ...{ tags } };
       sendData(finalData);
+
+      // setImgLogo(null);
+      // setTags([])
+      
+      // // resetForm();
+     
     },
   });
 
@@ -116,54 +122,63 @@ const Add = () => {
       Error: "Error",
       name: "companyName",
     },
+
     {
       key: 2,
       label: "Job Title",
       Error: "Error",
       name: "jobTitle",
     },
+
     {
       key: 3,
       label: "Location",
       Error: "Error",
       name: "location",
     },
+
     {
       key: 4,
       label: "Duration",
       Error: "Error",
       name: "duration",
     },
+
     {
       key: 5,
       label: "Start Date",
       Error: "Error",
       name: "startDate",
     },
+
     {
       key: 6,
       label: `${values.type === "Internship" ? "Stipend" : "Salary"}`,
       Error: "Error",
       name: "expectedSalary",
     },
+
     {
       key: 7,
       label: "Portal Link",
       Error: "Error",
       name: "portalLink",
     },
+
+    values.type === "Full Time" &&
     {
       key: 8,
       label: "Experience",
       Error: "Error",
       name: "experience",
     },
+
     {
       key: 9,
       label: "Batch",
       Error: "Error",
       name: "batch",
-    },
+    }
   ];
 
   // experience, batch eligible, show more, delete btn
