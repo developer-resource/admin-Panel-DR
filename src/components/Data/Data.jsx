@@ -25,10 +25,11 @@ const Data = () => {
 
   const delData = async (id) => {
     try {
+
       //Re-render with updated data
       setData(data.filter((obj) => obj._id !== id));
 
-      let result = await fetch(
+     await fetch( 
         `https://admin-panel-backend-production.up.railway.app/api/jobs/${id}`,
         {
           method: "delete",

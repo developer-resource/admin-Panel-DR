@@ -52,6 +52,8 @@ const Add = () => {
 
   const [imgLogo, setImgLogo] = useState(null);
 
+
+
   // Formik
   const [initialValues, setInitialValues] = useState({   //eslint-disable-line
     companyName: "",
@@ -77,11 +79,13 @@ const Add = () => {
       let finalData = { ...values, ...imgLogo, ...{ tags } };
       sendData(finalData);
 
-      // setImgLogo(null);
-      // setTags([])
+
+      resetForm();
+
+      setImgLogo(null);
+      setTags([])
       
-      // // resetForm();
-     
+
     },
   });
 
@@ -121,6 +125,7 @@ const Add = () => {
       label: "Company Name",
       Error: "Error",
       name: "companyName",
+      value : values.companyName
     },
 
     {
@@ -128,6 +133,7 @@ const Add = () => {
       label: "Job Title",
       Error: "Error",
       name: "jobTitle",
+      value : values.jobTitle
     },
 
     {
@@ -135,6 +141,7 @@ const Add = () => {
       label: "Location",
       Error: "Error",
       name: "location",
+      value : values.location
     },
 
     {
@@ -142,6 +149,7 @@ const Add = () => {
       label: "Duration",
       Error: "Error",
       name: "duration",
+      value : values.duration
     },
 
     {
@@ -149,6 +157,7 @@ const Add = () => {
       label: "Start Date",
       Error: "Error",
       name: "startDate",
+      value : values.startDate
     },
 
     {
@@ -156,6 +165,7 @@ const Add = () => {
       label: `${values.type === "Internship" ? "Stipend" : "Salary"}`,
       Error: "Error",
       name: "expectedSalary",
+      value : values.expectedSalary
     },
 
     {
@@ -163,14 +173,15 @@ const Add = () => {
       label: "Portal Link",
       Error: "Error",
       name: "portalLink",
+      value : values.portalLink
     },
 
-    values.type === "Full Time" &&
     {
       key: 8,
       label: "Experience",
       Error: "Error",
       name: "experience",
+      value : values.experience
     },
 
     {
@@ -178,6 +189,7 @@ const Add = () => {
       label: "Batch",
       Error: "Error",
       name: "batch",
+      value : values.batch
     }
   ];
 
@@ -241,7 +253,7 @@ const Add = () => {
               </div>
             </div>
 
-            {formList.map(({ key, name, label }) => {
+            {formList.map(({ key, name, label, value }) => {
               return (
                 <div
                   key={key}
@@ -253,6 +265,7 @@ const Add = () => {
                     onChange={handleChange}
                     className="input-field"
                     type="text"
+                    value={value}
                   />
                   <span className="error mt-1">
                     {name === "companyName" && touched.companyName
