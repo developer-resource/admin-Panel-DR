@@ -103,7 +103,7 @@ const Add = () => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        if (e.target.files[0].size / 1000 < 150) {
+        if (e.target.files[0].size / 1000 < 50) {
           setImgLogo({ profileImg: reader.result });
         } else {
           alert("Image size should be less than 150KB");
