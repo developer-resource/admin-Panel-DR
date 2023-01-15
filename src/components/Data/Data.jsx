@@ -10,7 +10,7 @@ const Data = () => {
   // Get Data
   const getData = async () => {
     let result = await fetch(
-      "https://admin-panel-backend-production.up.railway.app/api/jobs"
+      "https://dev-resources-backend.onrender.com/api/jobs"
     );
 
     result = await result.json();
@@ -30,7 +30,7 @@ const Data = () => {
       setData(data.filter((obj) => obj._id !== id));
 
      await fetch( 
-        `https://admin-panel-backend-production.up.railway.app/api/jobs/${id}`,
+        `https://dev-resources-backend.onrender.comapi/jobs/${id}`,
         {
           method: "delete",
         }

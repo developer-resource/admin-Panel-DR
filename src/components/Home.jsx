@@ -7,7 +7,7 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const res = await Axios.get(
-        "https://admin-panel-backend-production.up.railway.app/api/jobs"
+        "https://dev-resources-backend.onrender.com/api/jobs"
       );
       console.log(res.data);
       setData(res.data);

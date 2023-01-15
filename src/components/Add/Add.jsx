@@ -12,7 +12,7 @@ const addData = async (data) => {
   console.log("Add data called");
   try {
     const res = await Axios.post(
-      "https://admin-panel-backend-production.up.railway.app/api/jobs",
+      "https://dev-resources-backend.onrender.com/api/jobs",
       data
     );
     console.log("Successfully added data", res);
