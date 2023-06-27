@@ -30,7 +30,7 @@ const Data = () => {
       setData(data.filter((obj) => obj._id !== id));
 
      await fetch( 
-        `https://dev-resources-backend.onrender.comapi/jobs/${id}`,
+        `https://dev-resources-backend.onrender.com/api/jobs/${id}`,
         {
           method: "delete",
         }
